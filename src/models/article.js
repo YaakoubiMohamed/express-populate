@@ -5,10 +5,9 @@ const  articleSchema = new mongoose.Schema({
     titre: { type : String , required : true },
     contenu :{type :String,required:true},
     auteur:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+         type: mongoose.Schema.Types.ObjectId,
+         ref: 'User'
     },
-    password : {type:String,required:true},
     datePublication:{
         type:Date,
         default: Date.now
@@ -21,8 +20,11 @@ const  articleSchema = new mongoose.Schema({
     },
     statut:{
         type:String,
-        enum:['publié','en attente de publication'],
-        default:'en attente de publication',
+        enum:['publie','draft'],
+        default:'draft',
+    },
+    image: {
+        type: String
     }
 });
 

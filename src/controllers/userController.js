@@ -1,5 +1,4 @@
 const user = require('../models/user');
-const User = require('../models/user');
 
 
 
@@ -33,7 +32,7 @@ exports.login = async (req, res) => {
     try {
         const user = await User.findOne({ email });
         if (!user) {
-            return res.status(400).json({ message: 'Utilisateur introuvable' })
+            return res.status(404).json({ message: 'Utilisateur introuvable' })
         }
         const isMatch = await bcrypt.compare(password, user.hashedPassword);
         if (!isMatch) {
@@ -97,14 +96,4 @@ exports.deleteUser = async (req, res) => {
         console(error);
         res.status(500).json({ message: `Erreur interne du serveur.${error}` });
     }
-}
-exports.logout = async (req, res) => {
-    // On vide le contenu de la session
-    req.session.destroy((err) => {
-        if (err) {
-            console.error('Error when log out : ', err);
-            return res.status(500).json({ message: "erreur  lors de la déconnexion" })
-        }
-        res.status(200).json({ message: "Déconnexion réussie" })
-    })
 }

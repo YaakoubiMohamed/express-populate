@@ -9,9 +9,6 @@ const  userSchema = new mongoose.Schema({
     dateCreation:{
         type:Date,
         default: Date.now
-    },
-    falseLogin:{
-        type: Integer
     }
 });
 
